@@ -11,6 +11,7 @@ require (
 	github.com/envoyproxy/protoc-gen-validate v0.4.0 // indirect
 	github.com/golang/protobuf v1.4.2
 	github.com/google/pprof v0.0.0-20200630070148-6609db78bf68 // indirect
+	github.com/grpc-ecosystem/grpc-gateway v1.14.6
 	github.com/iancoleman/strcase v0.0.0-20191112232945-16388991a334 // indirect
 	github.com/ianlancetaylor/demangle v0.0.0-20200701184122-00992092f453 // indirect
 	github.com/kr/pretty v0.2.0 // indirect
@@ -31,7 +32,7 @@ require (
 	golang.org/x/sys v0.0.0-20200625212154-ddb9806d33ae // indirect
 	golang.org/x/text v0.3.3 // indirect
 	golang.org/x/tools v0.0.0-20200701221012-f01a4bec33ec // indirect
-	google.golang.org/genproto v0.0.0-20200701001935-0939c5918c31 // indirect
+	google.golang.org/genproto v0.0.0-20200701001935-0939c5918c31
 	google.golang.org/grpc v1.30.0
 	google.golang.org/protobuf v1.25.0
 	gopkg.in/check.v1 v1.0.0-20200227125254-8fa46927fb4f // indirect

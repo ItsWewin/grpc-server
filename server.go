@@ -1,12 +1,9 @@
 package main
 
 import (
-	"crypto/tls"
-	"crypto/x509"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/credentials"
-	"io/ioutil"
 	"log"
+	"mayihahah.com/grpc/helper"
 	"mayihahah.com/grpc/services"
 	"net"
 )
@@ -17,24 +14,29 @@ func main() {
 	//	log.Fatal(err)
 	//}
 	
-	cert, err := tls.LoadX509KeyPair("cert/server.pem", "cert/server.key")
-	if err != nil {
-		log.Fatal(err)
-	}
-	
-	certPool := x509.NewCertPool()
+	//cert, err := tls.LoadX509KeyPair("cert/server.pem", "cert/server.key")
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	//
+	//certPool := x509.NewCertPool()
+	//
+	//ca, err := ioutil.ReadFile("cert/ca.pem")
+	//if err != nil {
+	//	log.Fatal(err)
+	//}
+	//certPool.AppendCertsFromPEM(ca)
+	//
+	//creds := credentials.NewTLS(&tls.Config{
+	//	Certificates:                []tls.Certificate{cert},
+	//	ClientAuth:                  tls.RequireAndVerifyClientCert,
+	//	ClientCAs:                   certPool,
+	//})
 
-	ca, err := ioutil.ReadFile("cert/ca.pem")
+	creds, err := helper.GetServerCreds()
 	if err != nil {
 		log.Fatal(err)
 	}
-	certPool.AppendCertsFromPEM(ca)
-	
-	creds := credentials.NewTLS(&tls.Config{
-		Certificates:                []tls.Certificate{cert},
-		ClientAuth:                  tls.RequireAndVerifyClientCert,
-		ClientCAs:                   certPool,
-	})
 
 	rpcServer := grpc.NewServer(grpc.Creds(creds))
 	services.RegisterProdServiceServer(rpcServer, new(services.ProdServer))
