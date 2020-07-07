@@ -4,9 +4,15 @@ option go_package = ".;services";
 
 import "google/api/annotations.proto";
 
+enum ProdAreas {
+    A=0;
+    B=1;
+    C=2;
+}
 
 message ProdRequest {
     int32 prod_id = 1;
+    ProdAreas prod_area=2;
 }
 
 message ProdResponse {
@@ -29,4 +35,6 @@ service ProdService {
     }
 
     rpc GetProdStocks(QuerySize) returns (ProdResponseList) {}
+
+    rpc GetProdStocksByArea(ProdRequest) returns (ProdResponse) {}
 }
