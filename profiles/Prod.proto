@@ -35,9 +35,21 @@ service ProdService {
         };
     }
 
-    rpc GetProdStocks(QuerySize) returns (ProdResponseList) {}
+    rpc GetProdStocks(QuerySize) returns (ProdResponseList) {
+        option (google.api.http) = {
+            get: "/v1/prod/{size}/prods"
+        };
+    }
 
-    rpc GetProdStocksByArea(ProdRequest) returns (ProdResponse) {}
+    rpc GetProdStocksByArea(ProdRequest) returns (ProdResponse) {
+        option (google.api.http) = {
+            get: "/v1/prod/{prod_area}/prods"
+        };
+    }
 
-    rpc GetProdInfo(ProdRequest) returns (ProdModel) {}
+    rpc GetProdInfo(ProdRequest) returns (ProdModel) {
+        option (google.api.http) = {
+            get: "/v1/prod/{prod_id}"
+        };
+    }
 }
