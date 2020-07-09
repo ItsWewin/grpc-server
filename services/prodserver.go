@@ -45,3 +45,6 @@ func (p *ProdServer)  GetProdInfo(ctx context.Context,  req *ProdRequest) (*Prod
 		ProdPrice:     12345,
 	}, nil
 }
+
+
+

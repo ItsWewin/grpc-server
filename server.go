@@ -41,6 +41,8 @@ func main() {
 	rpcServer := grpc.NewServer(grpc.Creds(creds))
 	services.RegisterProdServiceServer(rpcServer, new(services.ProdServer))
 
+	services.RegisterOrderServiceServer(rpcServer, new(services.OrderServer))
+
 	lis, err := net.Listen("tcp", ":8081")
 	if err != nil {
 		log.Fatalf("server listen failed: %s", err)
