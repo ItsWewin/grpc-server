@@ -37,3 +37,11 @@ func (p *ProdServer) GetProdStocksByArea(ctx context.Context, req *ProdRequest) 
 	}
 	return &ProdResponse{ProdStock: stock}, nil
 }
+
+func (p *ProdServer)  GetProdInfo(ctx context.Context,  req *ProdRequest) (*ProdModel, error) {
+	return &ProdModel{
+		ProdId:        req.ProdId,
+		ProdName:     "prod name1",
+		ProdPrice:     12345,
+	}, nil
+}

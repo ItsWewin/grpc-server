@@ -18,4 +18,4 @@ req -new -key client.key -out client.csr
 x509 -req -sha256 -CA ca.pem -CAkey ca.key -CAcreateserial -days 3650 -in client.csr -out client.pem
 ```
 
-### 生成
+### import proto file

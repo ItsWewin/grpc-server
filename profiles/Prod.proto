@@ -4,6 +4,8 @@ option go_package = ".;services";
 
 import "google/api/annotations.proto";
 
+import "Models.proto";
+
 enum ProdAreas {
     A=0;
     B=1;
@@ -37,4 +39,6 @@ service ProdService {
     rpc GetProdStocks(QuerySize) returns (ProdResponseList) {}
 
     rpc GetProdStocksByArea(ProdRequest) returns (ProdResponse) {}
+
+    rpc GetProdInfo(ProdRequest) returns (ProdModel) {}
 }
