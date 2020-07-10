@@ -3,6 +3,8 @@ package services
 import (
 	"context"
 	"fmt"
+	"io"
+	"log"
 )
 
 type UserServer struct {
@@ -54,4 +56,26 @@ func (u *UserServer) GetUserInfoByServerStream(userReq *UserRequest, stream User
 	}
 
 	return nil
+}
+
+
+func (u *UserServer) GetUserInfoByClientStream(stream UserService_GetUserInfoByClientStreamServer) error {
+	users := make([]*User, 0)
+	for {
+		req, err := stream.Recv()
+		switch {
+		case err == io.EOF:
+			return stream.SendAndClose(&UserResponse{Users: users})
+		case err != nil:
+			log.Fatal(err)
+		}
+
+		for index, id := range req.UserIds {
+			user := &User{
+				Id:            id,
+				Score:         int32(index) + id,
+			}
+			users = append(users, user)
+		}
+	}
 }
