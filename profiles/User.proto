@@ -1,0 +1,22 @@
+syntax="proto3";
+package services;
+option go_package = ".;services";
+import "google/api/annotations.proto";
+
+import "Models.proto";
+
+message UserRequest {
+    repeated int32 user_ids=1;
+}
+
+message UserResponse {
+    repeated User users=1;
+}
+
+service UserService {
+    rpc GetUsersInfo(UserRequest) returns (UserResponse) {
+        option (google.api.http) = {
+            get: "/v1/users/{user_ids}"
+        };
+    }
+}
