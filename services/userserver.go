@@ -23,3 +23,35 @@ func (u *UserServer) GetUsersInfo(ctx context.Context, userReq *UserRequest) (*U
 
 	return &UserResponse{Users:users}, nil
 }
+
+func (u *UserServer) GetUserInfoByServerStream(userReq *UserRequest, stream UserService_GetUserInfoByServerStreamServer) error {
+
+	var score int32=101
+	users := make([]*User, 0)
+	for index, id := range userReq.UserIds {
+		user := &User{
+			Id:            id,
+			Score:         score,
+		}
+		score++
+		users = append(users, user)
+
+		if (index+1) % 2 == 0 && index > 0 {
+			err := stream.Send(&UserResponse{Users: users})
+			if err != nil {
+				return err
+			}
+
+			users =(users)[0:0]
+		}
+	}
+
+	if len(users) > 0 {
+		err := stream.Send(&UserResponse{Users:users})
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
