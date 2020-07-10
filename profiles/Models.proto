@@ -2,6 +2,7 @@ syntax="proto3";
 package services;
 option go_package = ".;services";
 import "google/protobuf/timestamp.proto";
+import "validate.proto";
 
 message ProdModel {
     int32 prod_id=1;
@@ -13,7 +14,7 @@ message OrderMain {
     int32 order_id=1;
     string order_no=2;
     int32 user_id=3;
-    float order_money=4;
+    float order_money=4[(validate.rules).float.gt = 1];
     google.protobuf.Timestamp order_time=5;
     repeated SubOrder sub_orders=6;
 }

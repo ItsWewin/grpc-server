@@ -12,6 +12,11 @@ type OrderServer struct {
 
 func (o *OrderServer) NewOrder(ctx context.Context, request *OrderRequest) (*OrderResponse, error) {
 	fmt.Println(request.OrderMain)
+
+	if err := request.OrderMain.Validate(); err != nil {
+		return &OrderResponse{Status: "1", Message: err.Error()}, nil
+	}
+
 	return &OrderResponse{
 		Status:        "0",
 		Message:       "create order succceed",

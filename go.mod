@@ -8,7 +8,7 @@ require (
 	github.com/cncf/udpa/go v0.0.0-20200629203442-efcf912fb354 // indirect
 	github.com/creack/pty v1.1.11 // indirect
 	github.com/envoyproxy/go-control-plane v0.9.6 // indirect
-	github.com/envoyproxy/protoc-gen-validate v0.4.0 // indirect
+	github.com/envoyproxy/protoc-gen-validate v0.4.0
 	github.com/golang/protobuf v1.4.2
 	github.com/google/pprof v0.0.0-20200630070148-6609db78bf68 // indirect
 	github.com/grpc-ecosystem/grpc-gateway v1.14.6
