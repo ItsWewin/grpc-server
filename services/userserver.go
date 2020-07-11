@@ -79,3 +79,28 @@ func (u *UserServer) GetUserInfoByClientStream(stream UserService_GetUserInfoByC
 		}
 	}
 }
+
+func (u *UserServer) GetUserInfoByBothSideStream(stream UserService_GetUserInfoByBothSideStreamServer) error {
+	users := make([]*User, 0)
+	for {
+		req, err := stream.Recv()
+		switch  {
+		case err == io.EOF:
+			return nil
+		case err != nil:
+			return err
+		}
+		for _, id := range req.UserIds {
+			u := &User{
+				Id:id,
+				Score: 100000000 + id,
+			}
+			users = append(users, u)
+		}
+		err = stream.Send(&UserResponse{Users: users})
+		if err != nil {
+			log.Fatal(err)
+		}
+		users = (users)[0:0]
+	}
+}

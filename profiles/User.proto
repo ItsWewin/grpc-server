@@ -22,4 +22,5 @@ service UserService {
 
     rpc GetUserInfoByServerStream(UserRequest) returns (stream UserResponse);
     rpc GetUserInfoByClientStream(stream UserRequest) returns (UserResponse);
+    rpc GetUserInfoByBothSideStream(stream UserRequest) returns (stream UserResponse);
 }
